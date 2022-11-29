@@ -70,6 +70,7 @@
                 <a href="catalog.php">Browse</a>
                 <a href="stock.php">Types</a>
                 <a href="budget.php">Budget Books</a>
+                <a href="orders.php">Orders</a>
                 </div>
             </div>
         </div>
@@ -79,33 +80,23 @@
     </header>
     <!-- HEADER END -->
 
-    <!-- BOTTOM NAVBAR -->
-    <nav class="bottom-navbar">
-        <a href="#home" class="fas fa-home"></a>
-        <a href="#survey" class="fas fa-blog"></a>
-        <a href="#newdrops" class="fas fa-tags"></a>
-        <a href="#featured" class="fas fa-star"></a>
-        <a href="#genres" class="fas fa-bars"></a>
-    </nav>
-
     <!-- LOGIN FORM -->
     <div class="login-form-container">
         <div id="close-login-btn" class="fas fa-times"></div>
-
-        <form action="">
+        <form action = "index.php" method="post">
             <h3>Sign In</h3>
-            <span>Username</span>
-            <input type="email" name="" id="" placeholder="Your Email" class="box">
+            <span>E-mail</span>
+            <input type="email" name="" id="" placeholder="Your Email" class="box" required>
             <span>Password</span>
-            <input type="password" name="" placeholder="Your Password" id="" class="box">
+            <input type="password" name="" placeholder="Your Password" id="" class="box"required>
             <div class="checkbox">
-                <input type="checkbox" name="" id="remember-me">
-                <label for="remember-me">Remember Me</label>
             </div>
-            <input type="submit" value="Sign In" class="btn">
+            <input type="submit" value="submit" class="btn">
             <p>Forgot Password? <a href="#">Click Here</a></p>
             <p>Don't have an account? <a href="#">Create one</a></p>
         </form>
+        
+
     </div>
 
     <!-- HOME SECTION -->
@@ -127,7 +118,6 @@
                             <?php
                             $row = $books->fetch_array();
                             printf($row['Name'] . "<br>");
-
                             printf("<img src=\"Book-covers/");
                             $cover = $row["ISBN"] . ".jpg";
                             foreach ($covers as $pic) {
@@ -137,7 +127,6 @@
                                 }
                             }
                             printf(" alt=\"\"><br>");
-
                             printf("By: " . $row['Author_first'] . " " . $row['Authors_Last'] . "<br>Genre: " . $row['Genre']);
                             ?></h1>
                     </a>

@@ -1,19 +1,19 @@
 <?php
-function openDB()
-{
+//Set these to your database information
+
     $host = "localhost";
     $user = "root";
     $password = "Trouble139";
     $database = "book_store_database";
+function openDB()
+{
+    global $host,$user, $password, $database;
     $con = new mysqli($host, $user, $password, $database);
     return $con;
 }
 function sortBy($filter)
 {
-    $host = "localhost";
-    $user = "root";
-    $password = "Trouble139";
-    $database = "book_store_database";
+    global $host,$user, $password, $database;
     $con = new mysqli($host, $user, $password, $database);
     $books =  mysqli_query($con, "SELECT * FROM catalog ORDER BY " . $filter); ?>
     <script type="text/javascript">
@@ -55,10 +55,7 @@ function sortBy($filter)
 
 function budgetSortBy($filter)
 {
-    $host = "localhost";
-    $user = "root";
-    $password = "Trouble139";
-    $database = "book_store_database";
+    global $host,$user, $password, $database;
     $con = new mysqli($host, $user, $password, $database);
     $books =  mysqli_query($con, "SELECT * FROM budget_books ORDER BY " . $filter); ?>
     <script type="text/javascript">
@@ -100,4 +97,20 @@ function budgetSortBy($filter)
     }
 }
 
+function logIn($email,$pword)
+{
+    global $host,$user, $password, $database;
+    $con = new mysqli($host, $user, $password, $database);
+    $users =  mysqli_query($con, "SELECT customer_id,Email,Pword FROM customers" );
+    while($row = mysqli_fetch_array($users))
+    {
+        if (($row["Email"])==$email AND ($row["Pword"] == $pword))
+        {
+            echo("<h1>TEST</h1>");
+            $_SESSION['id'] = $row["customer_id"];
+            header("Location: Customer.php");
+            break;
+        }
+    } 
+}
 ?>

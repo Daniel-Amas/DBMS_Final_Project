@@ -2,6 +2,14 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookStore</title>
+    <?php
+    require_once('functions.php');
+    $con = openDB();
+    ?>
     <style>
         /* Dropdown Button */
         .dropbtn {
@@ -44,44 +52,7 @@
         .dropdown:hover .dropbtn {
             background-color: #3e8e41;
         }
-
-        .card {
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-            max-width: 300px;
-            margin: auto;
-            text-align: center;
-            font-family: arial;
-        }
-
-        .price {
-            color: grey;
-            font-size: 22px;
-        }
-
-        .card button {
-            border: none;
-            outline: 0;
-            padding: 12px;
-            color: white;
-            background-color: #000;
-            text-align: center;
-            cursor: pointer;
-            width: 100%;
-            font-size: 18px;
-        }
-
-        .card button:hover {
-            opacity: 0.7;
-        }
     </style>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BookStore</title>
-    <?php
-    require_once('functions.php');
-    $con = openDB();
-    ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -116,61 +87,62 @@
             </div>
         </div>
 
+
+
     </header>
     <!-- HEADER END -->
-
-    <!-- BOTTOM NAVBAR -->
-    <nav class="bottom-navbar">
-        <a href="#home" class="fas fa-home"></a>
-        <a href="#survey" class="fas fa-blog"></a>
-        <a href="#newdrops" class="fas fa-tags"></a>
-        <a href="#featured" class="fas fa-star"></a>
-        <a href="#genres" class="fas fa-bars"></a>
-    </nav>
 
     <!-- LOGIN FORM -->
     <div class="login-form-container">
         <div id="close-login-btn" class="fas fa-times"></div>
-
-        <form action="">
+        <form action="index.php" method="post">
             <h3>Sign In</h3>
-            <span>Username</span>
-            <input type="email" name="" id="" placeholder="Your Email" class="box">
+            <span>E-mail</span>
+            <input type="email" name="" id="" placeholder="Your Email" class="box" required>
             <span>Password</span>
-            <input type="password" name="" placeholder="Your Password" id="" class="box">
+            <input type="password" name="" placeholder="Your Password" id="" class="box" required>
             <div class="checkbox">
-                <input type="checkbox" name="" id="remember-me">
-                <label for="remember-me">Remember Me</label>
             </div>
-            <input type="submit" value="Sign In" class="btn">
+            <input type="submit" value="submit" class="btn">
             <p>Forgot Password? <a href="#">Click Here</a></p>
             <p>Don't have an account? <a href="#">Create one</a></p>
         </form>
+    </div>
+
+    <div class="content" style="text-align:center">
+        <form action="orders.php" method="post">
+            <h3 style="font-size:20px">Enter your order number to see your order</h3>
+            <span>Order #</span><br>
+            <input style="background:bisque;" type="order" name="order" id="order" placeholder="Order" class="box" required>
+            <input type="submit" name="Submit" />
+        </form>
+        <?php
+        if (isset($_POST['Submit'])) {
+            $orderNum = $_POST['order'];
+            $orders = mysqli_query($con, "SELECT * FROM order_info");
+            while ($row = mysqli_fetch_array($orders)) {
+                if ($row["Order_id"] == $orderNum) {
+                    echo ("<br><br>
+                  <h2>Order #</h2>
+                  <p>" . $row['Order_id'] . "</p><br>
+                  <h2>Address</h2>
+                  <p>" . $row['Address'] . "</p><br>
+                  <h2>Price</h2>
+                  <p>" . $row['Price'] . "</p><br>
+                  <h2>Items</h2>
+                  <p>" . $row['Items'] . "</p><br>"
+                    );
+                }
+            }
+        }
+
+        ?>
+    </div>
+    </div>
+
+    <!-- FEATURED END -->
 
 
-    </div>
-    <div style="text-align: center;">
-        <h4 style="font-size:18px;">Here is all the different Authors and Genres stocked</h4>
-        <h1 style="font-size:50px; ">Authors</h1>
-        <h3 style="font-size:20px;">
-            <?php
-            $authors =  mysqli_query($con, "SELECT * FROM authors_stocked");
-            while ($row = mysqli_fetch_array($authors)) {
-                echo ($row["fname"] . " " . $row["lname"] . "<br>");
-            }
-            ?>
-        </h3>
-        <h1 style="font-size:50px; ">Genre</h1>
-        <h3 style="font-size:20px;">
-            <?php
-            $Genres =  mysqli_query($con, "SELECT MIN(Genre) AS genre FROM genres GROUP BY Genre");
-            while ($row = mysqli_fetch_array($Genres)) {
-                
-                echo ($row["genre"] . "<br>");
-            }
-            ?>
-        </h3>
-    </div>
     <!-- SWIPER CDN -->
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
