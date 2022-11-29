@@ -150,15 +150,15 @@
     </div>
     <div>
         <!-- SORTING -->
+        <h2 style="text-align:center; font-size:40px; ">Budget Books</h2>
+        <h3 style="text-align:center; font-size:20px; ">Books for those who are on a budget, or looking for cheaper alternatives</h3>
         <?php
-        if (array_key_exists('Name', $_POST)) {
-            sortBy("Name");
-        } else if (array_key_exists('Author', $_POST)) {
-            sortBy("Authors_Last");
-        } else if (array_key_exists('Price', $_POST)) {
-            sortBy("Price");
+        if (array_key_exists('name', $_POST)) {
+            budgetSortBy("name");
+        } else if (array_key_exists('price', $_POST)) {
+            budgetSortBy("price");
         }
-        sortBy("ISBN")
+        budgetSortBy("price")
         ?>
     </div>
     <!-- SWIPER CDN -->

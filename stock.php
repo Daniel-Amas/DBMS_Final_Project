@@ -107,10 +107,10 @@
             <div class="dropdown">
                 <button class="dropbtn">Menu</button>
                 <div class="dropdown-content">
-                <a href="index.php">Home</a>    
-                <a href="catalog.php">Browse</a>
-                <a href="stock.php">Types</a>
-                <a href="budget.php">Budget Books</a>
+                    <a href="index.php">Home</a>
+                    <a href="catalog.php">Browse</a>
+                    <a href="stock.php">Types</a>
+                    <a href="budget.php">Budget Books</a>
                 </div>
             </div>
         </div>
@@ -148,18 +148,27 @@
 
 
     </div>
-    <div>
-        <!-- SORTING -->
-        <?php
-        if (array_key_exists('Name', $_POST)) {
-            sortBy("Name");
-        } else if (array_key_exists('Author', $_POST)) {
-            sortBy("Authors_Last");
-        } else if (array_key_exists('Price', $_POST)) {
-            sortBy("Price");
-        }
-        sortBy("ISBN")
-        ?>
+    <div style="text-align: center;">
+        <h4 style="font-size:18px;">Here is all the different Authors and Genres stocked</h4>
+        <h1 style="font-size:50px; ">Authors</h1>
+        <h3 style="font-size:20px;">
+            <?php
+            $authors =  mysqli_query($con, "SELECT * FROM authors_stocked");
+            while ($row = mysqli_fetch_array($authors)) {
+                echo ($row["fname"] . " " . $row["lname"] . "<br>");
+            }
+            ?>
+        </h3>
+        <h1 style="font-size:50px; ">Genre</h1>
+        <h3 style="font-size:20px;">
+            <?php
+            $Genres =  mysqli_query($con, "SELECT MIN(Genre) AS genre FROM genres GROUP BY Genre");
+            while ($row = mysqli_fetch_array($Genres)) {
+                
+                echo ($row["genre"] . "<br>");
+            }
+            ?>
+        </h3>
     </div>
     <!-- SWIPER CDN -->
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
