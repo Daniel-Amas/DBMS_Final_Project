@@ -84,33 +84,83 @@
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores nam dignissimos cumque, alias nulla ullam vero voluptates rem eum esse.</p>
                 <a href="#" class="btn">Buy Now</a>
             </div>
-            <div class="swiper books-slider">
+            <div class="swiper books-slider" style="font-family: serif">
                 <div class="swiper-wrapper">
                     <?php
                     $books = mysqli_query($con, "SELECT * FROM catalog");
+                    $covers = scandir('Book-covers');
                     ?>
                     <a class="swiper-slide" alt="">
-                        <h1><?php
+                        <h1 style="font-family: serif">
+                            <?php
                             $row = $books->fetch_array();
-                            printf($row['Name'] . "<br>" . $row['Author_first'] . " " . $row['Authors_Last'] . "<br>Genre: " . $row['Genre']);
+                            printf($row['Name'] . "<br>");
+
+                            printf("<img src=\"Book-covers/");
+                            $cover = $row["ISBN"] . ".jpg";
+                            foreach ($covers as $pic) {
+
+                                if ($pic == ($cover)) {
+                                    printf($cover . "\"");
+                                }
+                            }
+                            printf(" alt=\"\"><br>");
+
+                            printf("By: " . $row['Author_first'] . " " . $row['Authors_Last'] . "<br>Genre: " . $row['Genre']);
+                            ?></h1>
+                    </a>
+                    <a class="swiper-slide" alt="">
+                        <h2><?php
+                            $row = $books->fetch_array();
+                            printf($row['Name'] . "<br>");
+
+                            printf("<img src=\"Book-covers/");
+                            $cover = $row["ISBN"] . ".jpg";
+                            foreach ($covers as $pic) {
+
+                                if ($pic == ($cover)) {
+                                    printf($cover . "\"");
+                                }
+                            }
+                            printf(" alt=\"\"><br>");
+
+                            printf("By: " . $row['Author_first'] . " " . $row['Authors_Last'] . "<br>Genre: " . $row['Genre']);
                             ?></h1>
                     </a>
                     <a class="swiper-slide" alt="">
                         <h1><?php
                             $row = $books->fetch_array();
-                            printf($row['Name'] . "<br>" . $row['Author_first'] . " " . $row['Authors_Last'] . "<br>Genre: " . $row['Genre']);
+                            printf($row['Name'] . "<br>");
+
+                            printf("<img src=\"Book-covers/");
+                            $cover = $row["ISBN"] . ".jpg";
+                            foreach ($covers as $pic) {
+
+                                if ($pic == ($cover)) {
+                                    printf($cover . "\"");
+                                }
+                            }
+                            printf(" alt=\"\"><br>");
+
+                            printf("By: " . $row['Author_first'] . " " . $row['Authors_Last'] . "<br>Genre: " . $row['Genre']);
                             ?></h1>
                     </a>
                     <a class="swiper-slide" alt="">
                         <h1><?php
                             $row = $books->fetch_array();
-                            printf($row['Name'] . "<br>" . $row['Author_first'] . " " . $row['Authors_Last'] . "<br>Genre: " . $row['Genre']);
-                            ?></h1>
-                    </a>
-                    <a class="swiper-slide" alt="">
-                        <h1><?php
-                            $row = $books->fetch_array();
-                            printf($row['Name'] . "<br>" . $row['Author_first'] . " " . $row['Authors_Last'] . "<br>Genre: " . $row['Genre']);
+                            printf($row['Name'] . "<br>");
+
+                            printf("<img src=\"Book-covers/");
+                            $cover = $row["ISBN"] . ".jpg";
+                            foreach ($covers as $pic) {
+
+                                if ($pic == ($cover)) {
+                                    printf($cover . "\"");
+                                }
+                            }
+                            printf(" alt=\"\"><br>");
+
+                            printf("By: " . $row['Author_first'] . " " . $row['Authors_Last'] . "<br>Genre: " . $row['Genre']);
                             ?></h1>
                     </a>
                 </div>
@@ -154,176 +204,48 @@
     <!-- FEATURED -->
     <section id="featured" class="featured">
         <h1 class="heading">
-            <span>Featured Books</span>
+            <span>Reviews</span>
         </h1>
         <div class="swiper featured-slider">
 
             <div class="swiper-wrapper">
+                <?php
+                $reviews =  mysqli_query($con, "SELECT * FROM reviews");
+                while ($row = mysqli_fetch_array($reviews)) {
+                    echo ("
+                    <div class=\"swiper-slide box\">
+                    <div class=\"image\">
+                    <h1>
+                    ");
+                    $books = mysqli_query($con, "SELECT * FROM catalog");
 
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="#" class="fas fa-search"></a>
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                    </div>
-                    <div class="image">
-                        <img src="images/Fantasy/FanBook11.png" alt="">
-                    </div>
-                    <div class="content">
-                        <h3>featured books</h3>
-                        <div class="price">$15.99 <span>$20.99</span></div>
-                        <a href="#" class="btn">add to cart</a>
-                    </div>
-                </div>
+                    while ($row2 = mysqli_fetch_array($books)) {
+                        if ($row2["ISBN"] == $row["BookID"]) {
+                            echo ($row2["Name"] . "<br><br>");
+                        }
+                    }
+                    printf("<img src=\"Book-covers/");
+                    $cover = $row["BookID"] . ".jpg";
+                    foreach ($covers as $pic) {
 
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="#" class="fas fa-search"></a>
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                    </div>
-                    <div class="image">
-                        <img src="images/Fantasy/FanBook5.png" alt="">
-                    </div>
-                    <div class="content">
-                        <h3>featured books</h3>
-                        <div class="price">$15.99 <span>$20.99</span></div>
-                        <a href="#" class="btn">add to cart</a>
-                    </div>
-                </div>
+                        if ($pic == ($cover)) {
+                            printf($cover . "\"");
+                        }
+                    }
+                    printf(" alt=\"\"><br>");
+                    echo ($row["Rating"] . "<br>" . $row["Review"] . "<br><br></h1></div></div>");
+                }
+                ?>
 
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="#" class="fas fa-search"></a>
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                    </div>
-                    <div class="image">
-                        <img src="images/Non-Fiction/NficBook14.png" alt="">
-                    </div>
-                    <div class="content">
-                        <h3>featured books</h3>
-                        <div class="price">$15.99 <span>$20.99</span></div>
-                        <a href="#" class="btn">add to cart</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="#" class="fas fa-search"></a>
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                    </div>
-                    <div class="image">
-                        <img src="images/Non-Fiction/NficBook4.png" alt="">
-                    </div>
-                    <div class="content">
-                        <h3>featured books</h3>
-                        <div class="price">$15.99 <span>$20.99</span></div>
-                        <a href="#" class="btn">add to cart</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="#" class="fas fa-search"></a>
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                    </div>
-                    <div class="image">
-                        <img src="images/Fiction/FicBook4.png" alt="">
-                    </div>
-                    <div class="content">
-                        <h3>featured books</h3>
-                        <div class="price">$15.99 <span>$20.99</span></div>
-                        <a href="#" class="btn">add to cart</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="#" class="fas fa-search"></a>
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                    </div>
-                    <div class="image">
-                        <img src="images/Fiction/FicBook13.png" alt="">
-                    </div>
-                    <div class="content">
-                        <h3>featured books</h3>
-                        <div class="price">$15.99 <span>$20.99</span></div>
-                        <a href="#" class="btn">add to cart</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="#" class="fas fa-search"></a>
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                    </div>
-                    <div class="image">
-                        <img src="images/Young-Adult/YaBook5.png" alt="">
-                    </div>
-                    <div class="content">
-                        <h3>featured books</h3>
-                        <div class="price">$15.99 <span>$20.99</span></div>
-                        <a href="#" class="btn">add to cart</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="#" class="fas fa-search"></a>
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                    </div>
-                    <div class="image">
-                        <img src="images/Young-Adult/YaBook8.png" alt="">
-                    </div>
-                    <div class="content">
-                        <h3>featured books</h3>
-                        <div class="price">$15.99 <span>$20.99</span></div>
-                        <a href="#" class="btn">add to cart</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="#" class="fas fa-search"></a>
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                    </div>
-                    <div class="image">
-                        <img src="images/Young-Adult/YaBook3.png" alt="">
-                    </div>
-                    <div class="content">
-                        <h3>featured books</h3>
-                        <div class="price">$15.99 <span>$20.99</span></div>
-                        <a href="#" class="btn">add to cart</a>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="icons">
-                        <a href="#" class="fas fa-search"></a>
-                        <a href="#" class="fas fa-heart"></a>
-                        <a href="#" class="fas fa-eye"></a>
-                    </div>
-                    <div class="image">
-                        <img src="images/Fantasy/FanBook8.png" alt="">
-                    </div>
-                    <div class="content">
-                        <h3>featured books</h3>
-                        <div class="price">$15.99 <span>$20.99</span></div>
-                        <a href="#" class="btn">add to cart</a>
-                    </div>
-                </div>
 
             </div>
-
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
+        </div>
+
+        </div>
+
+
 
         </div>
     </section>
