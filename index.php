@@ -81,8 +81,8 @@
         <div class="row">
             <div class="content">
                 <h3>Content</h3>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores nam dignissimos cumque, alias nulla ullam vero voluptates rem eum esse.</p>
-                <a href="catalog.php" class="btn">Buy Now</a>
+                <p>A great selection of books! Come and take a look through to find the best book for you.</p>
+                <a href="catalog.php" class="btn">Browse</a>
             </div>
             <div class="swiper books-slider" style="font-family: serif">
                 <div class="swiper-wrapper">
