@@ -19,7 +19,7 @@
     <!-- HEADER -->
     <header class="header">
         <div class="header-1">
-            <a href="#" class="logo"><i class="fas fa-book"></i> BookStore</a>
+            <a href="index.php" class="logo"><i class="fas fa-book"></i> BookStore</a>
 
             <form action="" class="search-form">
                 <input type="search" name="" placeholder="Search" id="search-box">
@@ -82,7 +82,7 @@
             <div class="content">
                 <h3>Content</h3>
                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Asperiores nam dignissimos cumque, alias nulla ullam vero voluptates rem eum esse.</p>
-                <a href="#" class="btn">Buy Now</a>
+                <a href="catalog.php" class="btn">Buy Now</a>
             </div>
             <div class="swiper books-slider" style="font-family: serif">
                 <div class="swiper-wrapper">
