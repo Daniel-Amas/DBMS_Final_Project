@@ -59,6 +59,8 @@ const getThief = (callback) => {
             let publishedDate = data.items[0].volumeInfo.publishedDate
             let img = data.items[0].volumeInfo.imageLinks.thumbnail
             
+            createCookie("Thief", title, "1");
+
             document.getElementById("thief_image").src = img;
             document.getElementById("thief_title").innerHTML = title;
             document.getElementById("thief_author").innerHTML = author;
@@ -82,4 +84,16 @@ getThief((err, data) => {
         console.log(data);
     }
 });
+function createCookie(name, value, days) {
+    var expires;
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+      expires = "; expires=" + date.toGMTString();
+    }
+    else {
+      expires = "";
+    }
+    document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";
+  }
 
