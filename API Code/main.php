@@ -7,20 +7,64 @@
     <title>Document</title>
 </head>
 <body>
-    <script src="script.js"></script>
-    <form action="/books" method="get">
-        <input type="text" name="q">
+    <script defer src="google.js"></script>
+
+    <form action="/" id="form" method="GET">
+        <label for="book">Book</label>
+        <input id="book" name="book" type="text">
         <button id="submit">Submit</button>
     </form>
 
-    <h1>The title is <span id="title"></span></h1>
-    <h1>The author is <span id="author"></span></h1>
-    <h1>The publisher is <span id="publisher"></span></h1>
-    <h1>The published date <span id="pubDate"></span></h1>
+    <!-- <script>
+        const wrapper = document.querySelector('.wrapper'),
+            form = wrapper.querySelectorAll('.form'),
+            submitInput = form[0].querySelector('input[type="submit"]');
+        
+
+        function getDataForm(e) {
+            e.preventDefault();
+            var formData = new FormData(form[0]);
+        }
+    </script> -->
+
+    <img id="hunger_image" src="" alt="">
+    <h1 id="hunger_title">The title is</h1>
+    <h1>The author is <span id="hunger_author"></span></h1>
+    <h1>The publisher is <span id="hunger_publisher"></span></h1>
+    <h1>The published date <span id="hunger_pubDate"></span></h1>
     
-    <img src="<?php $var = '<span id="image"></span>'; 
-    $var ?>" alt="">
+    <img id="thief_image" src="" alt="">
+    <h1 id="thief_title">The title is</h1>
+    <h1>The author is <span id="thief_author"></span></h1>
+    <h1>The publisher is <span id="thief_publisher"></span></h1>
+    <h1>The published date <span id="thief_pubDate"></span></h1>
+
+    <?php 
+        $host = "localhost";
+        $user = "root";
+        $password = "root";
+        $database = "book-store-database";
+
+        global $host,$user, $password, $database;
+        $con = new mysqli($host, $user, $password, $database);
+        return $con;
+
+        $books =  mysqli_query($con, "SELECT * FROM catalog ORDER BY " . "Name");
+        echo ($books);
+    ?>
     
+    
+    
+    <!-- <img id="hunger_image" src="" alt="">
+    <h1 id="hunger_title">The title is</h1>
+    <h1>The author is <span id="hunger_author"></span></h1>
+    <h1>The publisher is <span id="hunger_publisher"></span></h1>
+    <h1>The published date <span id="hunger_pubDate"></span></h1> -->
+    
+    
+    
+    
+
     
     
         
