@@ -42,9 +42,10 @@
                     let publisher = data.items[0].volumeInfo.publisher
                     let publishedDate = data.items[0].volumeInfo.publishedDate
                     let img = data.items[0].volumeInfo.imageLinks.thumbnail
+                    let ISBN = data.items[0].volumeInfo.industryIdentifiers[0].identifier
                     
                     createCookie("Title", title, "1");
-                    createCookie("ISBN", title, "1");
+                    createCookie("ISBN", ISBN, "1");
 
                     document.getElementById("image").src = img;
                     document.getElementById("title").innerHTML = title;
@@ -91,10 +92,9 @@
         </form>
         <?php
         if (isset($_POST['Submit'])) {
-            $ISBN = $_COOKIE["Code"];
+            $ISBN = $_COOKIE["ISBN"];
             $Title = $_COOKIE["Title"];
              mysqli_query($con, "INSERT INTO `books` (`Name`, `ISBN`) VALUES ('" . $Title . "', '" .$ISBN . "');");
-             mysqli_query($con, "INSERT INTO `catalog` (`Name`, `ISBN`) VALUES ('" . $Title . "', '" .$ISBN . "');");
         }
         ?>
     
