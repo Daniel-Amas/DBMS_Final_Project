@@ -16,7 +16,7 @@
             background-color: darkorange;
             color: white;
             padding: 16px;
-            font-size:  16px;
+            font-size: 16px;
             border: none;
         }
 

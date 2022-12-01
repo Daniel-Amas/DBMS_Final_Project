@@ -6,10 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-<body>
+<body style = "background:beige;">
+<?php
+    require_once('functions.php');
+    $con = openDB();
+    ?>
     <div id="error"></div>
     <script defer src="google.js"></script>
-
+    <h1>Owner Back End</h1>
+    <h2>Enter new books into your database</h2>
     <!-- <form action="/" id="form" method="GET"> -->
         <label for="book">Book</label>
         <input id="book" name="book" type="text" class="bookClass">
@@ -38,7 +43,8 @@
                     let publishedDate = data.items[0].volumeInfo.publishedDate
                     let img = data.items[0].volumeInfo.imageLinks.thumbnail
                     
-                    createCookie("Thief", title, "1");
+                    createCookie("Title", title, "1");
+                    createCookie("ISBN", title, "1");
 
                     document.getElementById("image").src = img;
                     document.getElementById("title").innerHTML = title;
@@ -73,37 +79,24 @@
     </script>
 
     <img id="image" src="" alt="">
-    <h1 id="title">The title is</h1>
-    <h1>The author is <span id="author"></span></h1>
-    <h1>The publisher is <span id="publisher"></span></h1>
-    <h1>The published date <span id="pubDate"></span></h1>
+    <h3 id="title">The title is</h1>
+    <h3>The author is: <span id="author"></span></h3>
+    <h3>The publisher is: <span id="publisher"></span></h3>
+    <h3>The published date: <span id="pubDate"></span></h3>
 
-    <?php 
-        $host = "localhost";
-        $user = "root";
-        $password = "Trouble139";
-        $database = "book_store_database";
 
-        global $host,$user, $password, $database;
-        $con = new mysqli($host, $user, $password, $database);
-        return $con;
-
-        $books =  mysqli_query($con, "SELECT * FROM catalog ORDER BY " . "Name");
-        echo ($books);
-    ?>
-    
-    
-    
-    <!-- <img id="hunger_image" src="" alt="">
-    <h1 id="hunger_title">The title is</h1>
-    <h1>The author is <span id="hunger_author"></span></h1>
-    <h1>The publisher is <span id="hunger_publisher"></span></h1>
-    <h1>The published date <span id="hunger_pubDate"></span></h1> -->
-    
-    
-    
-    
-
+    <form action="bookAdd.php" method="post">
+            <h3 style="font-size:20px">Add to Database</h3>
+            <input type="submit" name="Submit" />
+        </form>
+        <?php
+        if (isset($_POST['Submit'])) {
+            $ISBN = $_COOKIE["Code"];
+            $Title = $_COOKIE["Title"];
+             mysqli_query($con, "INSERT INTO `books` (`Name`, `ISBN`) VALUES ('" . $Title . "', '" .$ISBN . "');");
+             mysqli_query($con, "INSERT INTO `catalog` (`Name`, `ISBN`) VALUES ('" . $Title . "', '" .$ISBN . "');");
+        }
+        ?>
     
     
         

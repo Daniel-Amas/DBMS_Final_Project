@@ -111,6 +111,7 @@
                 <a href="catalog.php">Browse</a>
                 <a href="stock.php">Types</a>
                 <a href="budget.php">Budget Books</a>
+                <a href="orders.php">Orders</a>
                 </div>
             </div>
         </div>

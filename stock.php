@@ -89,9 +89,9 @@
 
 <body>
     <!-- HEADER -->
-    <header class="header">
+    <header class="header" >
         <div class="header-1">
-            <a href="index.php" class="logo"><i class="fas fa-book"></i> BookStore</a>
+            <a href="index.php" class="logo"><i class="fas fa-book" style="color:orange;size:30;"></i> BookStore</a>
 
             <form action="" class="search-form">
                 <input type="search" name="" placeholder="Search" id="search-box">
@@ -151,7 +151,7 @@
     </div>
     <div style="text-align: center;">
         <h4 style="font-size:18px;">Here is all the different Authors and Genres stocked</h4>
-        <h1 style="font-size:50px; ">Authors</h1>
+        <h1 style="font-size:40px; ">Books Written By:</h1>
         <h3 style="font-size:20px;">
             <?php
             $authors =  mysqli_query($con, "SELECT * FROM authors_stocked");
@@ -160,13 +160,23 @@
             }
             ?>
         </h3>
-        <h1 style="font-size:50px; ">Genre</h1>
+        <h1 style="font-size:40px; ">Books in these Genres:</h1>
         <h3 style="font-size:20px;">
             <?php
             $Genres =  mysqli_query($con, "SELECT MIN(Genre) AS genre FROM genres GROUP BY Genre");
             while ($row = mysqli_fetch_array($Genres)) {
                 
                 echo ($row["genre"] . "<br>");
+            }
+            ?>
+        </h3>
+        <h1 style="font-size:40px; ">Books published by:</h1>
+        <h3 style="font-size:20px;">
+            <?php
+            $pubs =  mysqli_query($con, "SELECT Name FROM publisher");
+            while ($row = mysqli_fetch_array($pubs)) {
+                
+                echo ($row["Name"] . "<br>");
             }
             ?>
         </h3>
