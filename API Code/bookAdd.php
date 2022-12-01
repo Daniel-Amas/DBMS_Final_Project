@@ -66,7 +66,8 @@
                     document.getElementById("price").innerHTML = cost;
                     
 
-                } else if (request.readyState === 4) {
+                } else if (request.readyState === 4)
+                {
                     callback('could not fetch data', undefined);
                 }
             });
