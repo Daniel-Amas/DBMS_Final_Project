@@ -42,3 +42,6 @@ Find the file functions.php, at the top enter your information for your mysql se
 In your browser search "http://localhost/Yourfile/index.php"
 Again Yourfile is the dile where you stored the project in htdocs
 ![image](https://user-images.githubusercontent.com/94157031/204951670-ab880c2a-8230-4a90-a626-7a1779e1d34a.png)
+To access the Owner view to add books enter "In your browser search "http://localhost/Yourfile/bookAdd.php" 
+![image](https://user-images.githubusercontent.com/94157031/205098529-fbb1035a-fda4-45a1-87cd-ad5a856c4bc9.png)
+
