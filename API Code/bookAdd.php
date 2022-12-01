@@ -25,7 +25,7 @@
         
         function getText() {
             let input = document.getElementsByClassName("bookClass")[0].value;
-            const getThief = (callback) => {
+            const getBook = (callback) => {
             var url = "https://www.googleapis.com/books/v1/volumes?q=";
             url += input;
             alert(url);
@@ -43,15 +43,18 @@
                     let publishedDate = data.items[0].volumeInfo.publishedDate
                     let img = data.items[0].volumeInfo.imageLinks.thumbnail
                     let ISBN = data.items[0].volumeInfo.industryIdentifiers[0].identifier
-                    
+                    let cost = data.items[0].saleInfo.listPrice.amount
+
                     createCookie("Title", title, "1");
                     createCookie("ISBN", ISBN, "1");
+                    createCookie("Price", cost, "1");
 
                     document.getElementById("image").src = img;
                     document.getElementById("title").innerHTML = title;
                     document.getElementById("author").innerHTML = author;
                     document.getElementById("publisher").innerHTML = publisher;
                     document.getElementById("pubDate").innerHTML = publishedDate;
+                    document.getElementById("price").innerHTML = cost;
                     
 
                 } else if (request.readyState === 4) {
@@ -62,7 +65,7 @@
             request.open('GET', url);
             request.send();
             }
-            getThief((err, data) => {
+            getBook((err, data) => {
                 console.log('callback fired');
                 if(err) {
                     console.log(err);
@@ -84,6 +87,7 @@
     <h3>The author is: <span id="author"></span></h3>
     <h3>The publisher is: <span id="publisher"></span></h3>
     <h3>The published date: <span id="pubDate"></span></h3>
+    <h3>List Price: <span id="price"></span></h3>
 
 
     <form action="bookAdd.php" method="post">
@@ -94,7 +98,8 @@
         if (isset($_POST['Submit'])) {
             $ISBN = $_COOKIE["ISBN"];
             $Title = $_COOKIE["Title"];
-             mysqli_query($con, "INSERT INTO `books` (`Name`, `ISBN`) VALUES ('" . $Title . "', '" .$ISBN . "');");
+            $Price = $_COOKIE["Price"];
+            mysqli_query($con, "INSERT INTO `books` (`Name`, `ISBN`, `Price`) VALUES ('" . $Title . "', '" .$ISBN . "', '" .$Price . "');");
         }
         ?>
     

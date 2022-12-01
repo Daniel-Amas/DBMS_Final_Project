@@ -3,8 +3,8 @@
 
     $host = "localhost";
     $user = "root";
-    $password = "Trouble139";
-    $database = "book_store_database";
+    $password = "root";
+    $database = "book-store-database";
 function openDB()
 {
     global $host,$user, $password, $database;
