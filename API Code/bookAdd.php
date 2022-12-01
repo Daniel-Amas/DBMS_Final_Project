@@ -37,20 +37,29 @@
                     //Parse the responseText into JSON format
                     const data = JSON.parse(request.responseText);
                     
-                    let title = data.items[0].volumeInfo.title
-                    let author = data.items[0].volumeInfo.authors
-                    let publisher = data.items[0].volumeInfo.publisher
-                    let publishedDate = data.items[0].volumeInfo.publishedDate
-                    let img = data.items[0].volumeInfo.imageLinks.thumbnail
-                    let ISBN = data.items[0].volumeInfo.industryIdentifiers[0].identifier
-                    let cost = data.items[0].saleInfo.listPrice.amount
-
+                    let img
+                    let title
+                    let author
+                    let publisher
+                    let publishedDate
+                    let ISBN
+                    let cost
+                    
+                    try {img = data.items[0].volumeInfo.imageLinks.thumbnail} catch (error) {img = "N/A"}
+                    try {title = data.items[0].volumeInfo.title} catch (error) {title = "N/A"}
+                    try {author = data.items[0].volumeInfo.authors} catch (error) {author = "N/A"}
+                    try {publisher = data.items[0].volumeInfo.publisher} catch (error) {publisher = "N/A"}
+                    try {publishedDate = data.items[0].volumeInfo.publishedDate} catch (error) {publishedDate = "N/A"}
+                    try {ISBN = data.items[0].volumeInfo.industryIdentifiers[0].identifier} catch (error) {cost = "N/A"}
+                    try {cost = data.items[0].saleInfo.listPrice.amount} catch (error) {cost = 0.00}
+                    
                     createCookie("Title", title, "1");
                     createCookie("ISBN", ISBN, "1");
                     createCookie("Price", cost, "1");
 
                     document.getElementById("image").src = img;
                     document.getElementById("title").innerHTML = title;
+                    document.getElementById("isbn").innerHTML = ISBN;
                     document.getElementById("author").innerHTML = author;
                     document.getElementById("publisher").innerHTML = publisher;
                     document.getElementById("pubDate").innerHTML = publishedDate;
@@ -83,10 +92,11 @@
     </script>
 
     <img id="image" src="" alt="">
-    <h3 id="title">The title is</h1>
-    <h3>The author is: <span id="author"></span></h3>
-    <h3>The publisher is: <span id="publisher"></span></h3>
-    <h3>The published date: <span id="pubDate"></span></h3>
+    <h3>Title: <span id="title"></h3>
+    <h3>ISBN: <span id="isbn"></h3>
+    <h3>Author: <span id="author"></span></h3>
+    <h3>Publisher: <span id="publisher"></span></h3>
+    <h3>Published Date: <span id="pubDate"></span></h3>
     <h3>List Price: <span id="price"></span></h3>
 
 
