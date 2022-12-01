@@ -16,6 +16,19 @@
         <button id="submit" onclick="getText()" >Submit</button>
     <!-- </form> -->
 
+    <?php
+        $host = "localhost";
+        $user = "root";
+        $password = "root";
+        $database = "book-store-database";
+
+        global $host, $user, $password, $database;
+        $con = new mysqli($host, $user, $password, $database);
+        $ISBN = $_COOKIE["Code"];
+        $Title = $_COOKIE["Title"];
+        mysqli_query($con, "INSERT INTO books (Name, ISBN) VALUES ('" . $Title . "', '" .$ISBN . "');");
+    ?>
+
     <script>
         
         function getText() {
@@ -80,38 +93,6 @@
     <h1>The publisher is <span id="publisher"></span></h1>
     <h1>The published date <span id="pubDate"></span></h1>
     <h1>Description <span id="desc"></span></h1>
-
-
-    <?php 
-        $host = "localhost";
-        $user = "root";
-        $password = "root";
-        $database = "book-store-database";
-
-        global $host,$user, $password, $database;
-        $con = new mysqli($host, $user, $password, $database);
-        return $con;
-
-        $books =  mysqli_query($con, "SELECT * FROM catalog ORDER BY " . "Name");
-        echo ($books);
-    ?>
-    
-    
-    
-    <!-- <img id="hunger_image" src="" alt="">
-    <h1 id="hunger_title">The title is</h1>
-    <h1>The author is <span id="hunger_author"></span></h1>
-    <h1>The publisher is <span id="hunger_publisher"></span></h1>
-    <h1>The published date <span id="hunger_pubDate"></span></h1> -->
-    
-    
-    
-    
-
-    
-    
-        
-    
     
 </body>
 </html>
