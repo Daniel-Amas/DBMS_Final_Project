@@ -20,7 +20,7 @@
         
         function getText() {
             let input = document.getElementsByClassName("bookClass")[0].value;
-            const getThief = (callback) => {
+            const getBook = (callback) => {
             var url = "https://www.googleapis.com/books/v1/volumes?q=";
             url += input;
             alert(url);
@@ -37,6 +37,7 @@
                     let publisher = data.items[0].volumeInfo.publisher
                     let publishedDate = data.items[0].volumeInfo.publishedDate
                     let img = data.items[0].volumeInfo.imageLinks.thumbnail
+                    let desc = data.items[0].volumeInfo.description
                     
                     createCookie("Thief", title, "1");
 
@@ -45,6 +46,7 @@
                     document.getElementById("author").innerHTML = author;
                     document.getElementById("publisher").innerHTML = publisher;
                     document.getElementById("pubDate").innerHTML = publishedDate;
+                    document.getElementById("desc").innerHTML = desc;
                     
 
                 } else if (request.readyState === 4) {
@@ -55,7 +57,7 @@
             request.open('GET', url);
             request.send();
             }
-            getThief((err, data) => {
+            getBook((err, data) => {
                 console.log('callback fired');
                 if(err) {
                     console.log(err);
@@ -77,6 +79,8 @@
     <h1>The author is <span id="author"></span></h1>
     <h1>The publisher is <span id="publisher"></span></h1>
     <h1>The published date <span id="pubDate"></span></h1>
+    <h1>Description <span id="desc"></span></h1>
+
 
     <?php 
         $host = "localhost";
